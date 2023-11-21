@@ -128,7 +128,7 @@ void net::FileServer::serveFile(const std::filesystem::path& path)
     fs.open(path, std::ios_base::binary | std::ios::ate);
     if (fs)
     {
-        long sz = (long)fs.tellg();
+        long sz = (long)fs.tellg(); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
         fs.seekg(0);
 
         std::stringstream ss;
@@ -146,7 +146,7 @@ void net::FileServer::serveFile(const std::filesystem::path& path)
         {
             fs.read(buff, sizeof(buff));
             std::streamsize bytesRead = fs.gcount();
-            _streamWriter->write(buff, (int)bytesRead);
+            _streamWriter->write(buff, (int)bytesRead); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
         }
         fs.close();
     }

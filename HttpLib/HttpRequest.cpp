@@ -181,7 +181,7 @@ std::string net::HttpRequest::readPostData() const
     std::ostringstream ss;
     ContentReader reader(_stream, _contentLength, _contentLengthValid);
     while (auto chunk = reader.readChunk())
-        ss.write(chunk.data, (size_t)chunk.size);
+        ss.write(chunk.data, (size_t)chunk.size); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
 
     return ss.str();
 }

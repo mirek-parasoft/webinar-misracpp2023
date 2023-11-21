@@ -92,7 +92,7 @@ std::string net::StringUtils::urlDecode(std::string_view url)
         {
             int hiNibble = hex2dec(url[++i]);
             int loNibble = hex2dec(url[++i]);
-            result << (char)(16 * hiNibble + loNibble);
+            result << (char)(16 * hiNibble + loNibble); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
         }
         else
         {
@@ -176,7 +176,7 @@ public:
         bits += n;
         if (bits >= 8)
         {
-            bytes << (char)(accumulator >> (bits - 8));
+            bytes << (char)(accumulator >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
             accumulator &= 0xff;
             bits -= 8;
         }

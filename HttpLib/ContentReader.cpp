@@ -17,7 +17,7 @@ net::ContentReader::ContentReader(InputStream* stream, int contentLength, bool c
     auto maxContentLength = std::numeric_limits<decltype(_remaining)>::max();
     _stream = stream;
     _remaining = contentLengthValid ? contentLength : maxContentLength;
-    _buffSize = (int)sizeof(_buff);
+    _buffSize = (int)sizeof(_buff); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
 }
 
 net::ContentChunk net::ContentReader::readChunk()

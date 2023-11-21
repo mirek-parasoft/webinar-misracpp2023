@@ -83,9 +83,9 @@ bool net::Socket::bind(const EndPoint& endPoint)
 {
     // Ensure port is released to OS as soon as application closes
     int one = 1;
-    setsockopt(pImpl->s, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof(one));
+    setsockopt(pImpl->s, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof(one)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
 
-    auto result = ::bind(pImpl->s, (struct sockaddr*)&endPoint.pImpl->sa, sizeof(endPoint.pImpl->sa));
+    auto result = ::bind(pImpl->s, (struct sockaddr*)&endPoint.pImpl->sa, sizeof(endPoint.pImpl->sa)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
     return result != -1;
 }
 
@@ -100,7 +100,7 @@ net::Socket net::Socket::accept(EndPoint* clientIP)
     struct sockaddr_in clientaddr;
     socklen_t clientaddr_size = sizeof(clientaddr);
     Socket client(Protocol::None);
-    client.pImpl->s = ::accept(pImpl->s, (struct sockaddr *)&clientaddr, &clientaddr_size);
+    client.pImpl->s = ::accept(pImpl->s, (struct sockaddr *)&clientaddr, &clientaddr_size); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
     if (valid() && clientIP != nullptr)
     {
         clientIP->pImpl->sa = clientaddr;
@@ -129,22 +129,22 @@ int net::Socket::receive(char* buf, int len)
 int net::Socket::sendTo(const char* buf, int len, const EndPoint& endPoint)
 {
     int flags = 0;
-    return ::sendto(pImpl->s, buf, len, flags, (struct sockaddr*)&endPoint.pImpl->sa, sizeof(endPoint.pImpl->sa));
+    return ::sendto(pImpl->s, buf, len, flags, (struct sockaddr*)&endPoint.pImpl->sa, sizeof(endPoint.pImpl->sa)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
 }
 
 int net::Socket::receiveFrom(char* buf, int len, EndPoint* sourceAddress)
 {
     int flags = 0;
-    socklen_t fromLen = (socklen_t)sizeof(sourceAddress->pImpl->sa);
-    return ::recvfrom(pImpl->s, buf, len, flags, (struct sockaddr*)&sourceAddress->pImpl->sa, &fromLen);
+    socklen_t fromLen = (socklen_t)sizeof(sourceAddress->pImpl->sa); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
+    return ::recvfrom(pImpl->s, buf, len, flags, (struct sockaddr*)&sourceAddress->pImpl->sa, &fromLen); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
 }
 
 net::EndPoint net::Socket::endPoint() const
 {
     net::EndPoint endPoint;
-    socklen_t nameLen = (int)sizeof(endPoint.pImpl->sa);
+    socklen_t nameLen = (int)sizeof(endPoint.pImpl->sa); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
     //int getsockname(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
-    ::getsockname(pImpl->s, (struct sockaddr*)&endPoint.pImpl->sa, &nameLen);
+    ::getsockname(pImpl->s, (struct sockaddr*)&endPoint.pImpl->sa, &nameLen); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
     return endPoint;
 }
 

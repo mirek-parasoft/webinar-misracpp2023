@@ -56,15 +56,15 @@ int main(int argc, char* argv[])
 
     for (int i = 1; i < argc; i += 2)
     {
-        if (strcmp(argv[i], "-p") == 0)
+        if (strcmp(argv[i], "-p") == 0) // parasoft-suppress MISRACPP2023-18_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
         {
             port = atoi(argv[i + 1]);
         }
-        else if (strcmp(argv[i], "-a") == 0)
+        else if (strcmp(argv[i], "-a") == 0) // parasoft-suppress MISRACPP2023-18_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
         {
             ip = argv[i + 1];
         }
-        else if (strcmp(argv[i], "-r") == 0)
+        else if (strcmp(argv[i], "-r") == 0) // parasoft-suppress MISRACPP2023-18_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
         {
             rootFolder = argv[i + 1];
         }

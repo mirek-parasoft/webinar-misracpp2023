@@ -59,7 +59,7 @@ bool net::MultipartFormDataParser::isBoundary(char* chunk, int size)
     auto boundaryLength = _boundary.length();
     if (size == boundaryLength + 2)
     {
-        if (strncmp(&chunk[2], _boundary.c_str(), size - 2) == 0)
+        if (strncmp(&chunk[2], _boundary.c_str(), size - 2) == 0) // parasoft-suppress MISRACPP2023-18_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
             return true;
     }
     else if (size == boundaryLength + 4)
