@@ -74,7 +74,7 @@ jobs:
         # Uncomment if you are using C/C++test 2020.2 to generate a SARIF report:
         # reportFormat: xml,html,custom
         testConfig: 'MISRA C++ 2023.properties'
-        # additionalParams: '-fail -settings dtp.settings -publish'
+        additionalParams: '-fail -settings dtp.settings -publish'
 
     - name: Upload results (SARIF)
       if: always()

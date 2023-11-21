@@ -166,18 +166,18 @@ public:
     std::stringstream bytes;
 
 private:
-    uint16_t accumulator1;
+    uint16_t accumulator;
     int bits = 0;
 
 public:
     void addBits(uint8_t value, int n)
     {
-        accumulator1 = (accumulator1 << n) + value;
+        accumulator = (accumulator << n) + value;
         bits += n;
         if (bits >= 8)
         {
-            bytes << (char)(accumulator1 >> (bits - 8));
-            accumulator1 &= 0xff;
+            bytes << (char)(accumulator >> (bits - 8));
+            accumulator &= 0xff;
             bits -= 8;
         }
     }
