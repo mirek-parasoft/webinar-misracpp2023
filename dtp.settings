@@ -1,0 +1,5 @@
+dtp.url=http://dtp22.parasoft.com:8080/
+dtp.user=admin
+dtp.password=admin
+dtp.project=MISRA C++:2023 WEBINAR
+report.dtp.publish.src=full
