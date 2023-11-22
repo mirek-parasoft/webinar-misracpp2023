@@ -4,7 +4,7 @@
 #include <random>
 #include <string.h>
 
-std::string SEED = net::StringUtils::randomString(64); // parasoft-suppress MISRACPP2023-6_7_2-a "Accepted, permit XXX"
+std::string SEED = net::StringUtils::randomString(64); 
 
 std::string net::StringUtils::randomString(int length) noexcept
 {
@@ -181,7 +181,7 @@ public:
     std::stringstream bytes;
 
 private:
-    uint16_t accumulator;
+    uint16_t accumulator = 0;
     int bits = 0;
 
 public:
