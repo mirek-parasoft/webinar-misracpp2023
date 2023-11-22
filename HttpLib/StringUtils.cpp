@@ -4,7 +4,7 @@
 #include <random>
 #include <string.h>
 
-std::string SEED = net::StringUtils::randomString(64); 
+std::string SEED = net::StringUtils::randomString(64);  // parasoft-suppress MISRACPP2023-6_7_2-a "accepted"
 
 std::string net::StringUtils::randomString(int length) noexcept
 {
