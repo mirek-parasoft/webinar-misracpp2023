@@ -19,29 +19,6 @@ std::string net::StringUtils::randomString(int length)
     return result;
 }
 
-class TBitStream
-{
-public:
-    std::stringstream bytes;
-
-private:
-    uint16_t acctor;
-    int bits = 0;
-
-public:
-    void addBits(uint8_t value, int n)
-    {
-        acctor = (acctor << n) + value;
-        bits += n;
-        if (bits >= 8)
-        {
-            bytes << (char)(acctor >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
-            acctor &= 0xff;
-            bits -= 8;
-        }
-    }
-};
-
 std::string net::StringUtils::toLower(std::string_view stringView)
 {
     std::string str(stringView);
@@ -240,4 +217,25 @@ std::pair<std::string_view, std::string_view> net::StringUtils::splitAtFirstOf(s
         return std::make_pair(str.substr(0, pos), str.substr(0, 0));
 }
 
+class TBitStream
+{
+public:
+    std::stringstream bytes;
 
+private:
+    uint16_t acctor;
+    int bits = 0;
+
+public:
+    void addBits(uint8_t value, int n)
+    {
+        acctor = (acctor << n) + value;
+        bits += n;
+        if (bits >= 8)
+        {
+            bytes << (char)(acctor >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
+            acctor &= 0xff;
+            bits -= 8;
+        }
+    }
+};
