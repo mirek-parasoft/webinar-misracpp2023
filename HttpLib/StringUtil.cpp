@@ -25,7 +25,7 @@ public:
     std::stringstream bytes;
 
 private:
-    uint16_t acctor = 0;
+    uint16_t acctor;
     int bits = 0;
 
 public:
