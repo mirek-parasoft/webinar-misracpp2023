@@ -90,7 +90,7 @@ public:
     std::stringstream bytes;
 
 private:
-    uint16_t acctor;
+    uint16_t acctor = 0;
     int bits = 0;
 
 public:
