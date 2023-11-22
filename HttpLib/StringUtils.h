@@ -8,6 +8,7 @@
 
 namespace net::StringUtils
 {
+    std::string randomString(int length) noexcept;
     std::string toLower(std::string_view str);
     void parseNameValuePairs(std::list<Property>& props, std::string_view str, char delim);
     std::string urlDecode(std::string_view url);
@@ -18,5 +19,4 @@ namespace net::StringUtils
     std::string base64_decode(std::string_view encoded);
     std::vector<std::string_view> split(std::string_view str);
     std::pair<std::string_view, std::string_view> splitAtFirstOf(std::string_view str, char delimiter);
-    std::string randomString(int length);
 }

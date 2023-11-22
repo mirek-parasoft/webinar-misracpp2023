@@ -6,7 +6,7 @@
 
 std::string SEED = net::StringUtils::randomString(64); // parasoft-suppress MISRACPP2023-6_7_2-a "Accepted, permit XXX"
 
-noexcept std::string net::StringUtils::randomString(int length)
+std::string net::StringUtils::randomString(int length) noexcept
 {
     const std::string alphabet = "0123456789ABCDEF";
     std::random_device random_device;
