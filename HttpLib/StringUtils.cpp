@@ -181,7 +181,7 @@ public:
     std::stringstream bytes;
 
 private:
-    uint16_t accumulator = 0;
+    uint16_t accumulator;
     int bits = 0;
 
 public:
