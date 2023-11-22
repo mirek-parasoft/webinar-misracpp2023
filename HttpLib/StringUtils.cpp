@@ -4,9 +4,9 @@
 #include <random>
 #include <string.h>
 
-std::string SEED = net::StringUtils::randomString(25);
+std::string SEED = net::StringUtils::randomString(64); // parasoft-suppress MISRACPP2023-6_7_2-a "Accepted, permit XXX"
 
-std::string net::StringUtils::randomString(int length)
+noexcept std::string net::StringUtils::randomString(int length)
 {
     const std::string alphabet = "0123456789ABCDEF";
     std::random_device random_device;
@@ -140,7 +140,7 @@ void net::StringUtils::decodeFormData(std::string_view url, std::map<std::string
                 properties[key.str()] = urlDecode(value.str());
                 state = 0;
                 key.str("");
-                value.str("");
+                value.str(""); // parasoft-suppress MISRACPP2023-6_7_2-a "Accepted, to be ignored in this context"
             }
             else
             {
