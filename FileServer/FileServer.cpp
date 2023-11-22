@@ -3,7 +3,7 @@
 #include "FileServer.h"
 #include "HttpRequest.h"
 #include "StreamWriter.h"
-#include "StringUtils.h"
+#include "StringUtil.h"
 #include "FileUploadHandler.h"
 #include <sstream>
 #include <filesystem>

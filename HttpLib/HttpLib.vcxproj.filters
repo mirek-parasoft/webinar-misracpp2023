@@ -57,7 +57,7 @@
     <ClInclude Include="StreamWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StringUtils.h">
+    <ClInclude Include="StringUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UploadedFile.h">

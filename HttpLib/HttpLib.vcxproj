@@ -169,7 +169,7 @@
     <ClInclude Include="Stream.h" />
     <ClInclude Include="StreamReader.h" />
     <ClInclude Include="StreamWriter.h" />
-    <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="StringUtil.h" />
     <ClInclude Include="UploadedFile.h" />
     <ClInclude Include="UploadHandler.h" />
     <ClInclude Include="UrlEncodedFormDataParser.h" />
