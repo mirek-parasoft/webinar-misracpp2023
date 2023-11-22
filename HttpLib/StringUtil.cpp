@@ -28,6 +28,29 @@ std::string net::StringUtils::toLower(std::string_view stringView)
     return std::move(str);
 }
 
+class TBitStream
+{
+public:
+    std::stringstream bytes;
+
+private:
+    uint16_t acctor;
+    int bits = 0;
+
+public:
+    void addBits(uint8_t value, int n)
+    {
+        acctor = (acctor << n) + value;
+        bits += n;
+        if (bits >= 8)
+        {
+            bytes << (char)(acctor >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
+            acctor &= 0xff;
+            bits -= 8;
+        }
+    }
+};
+
 void net::StringUtils::parseNameValuePairs(std::list<Property>& props, std::string_view str, char delim)
 {
     props.clear();
@@ -83,29 +106,6 @@ void net::StringUtils::parseNameValuePairs(std::list<Property>& props, std::stri
         props.push_back(Property(name.str(), value.str()));
     }
 }
-
-class TBitStream
-{
-public:
-    std::stringstream bytes;
-
-private:
-    uint16_t acctor = 0;
-    int bits = 0;
-
-public:
-    void addBits(uint8_t value, int n)
-    {
-        acctor = (acctor << n) + value;
-        bits += n;
-        if (bits >= 8)
-        {
-            bytes << (char)(acctor >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
-            acctor &= 0xff;
-            bits -= 8;
-        }
-    }
-};
 
 static int hex2dec(char ch)
 {
