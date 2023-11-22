@@ -19,22 +19,13 @@ std::string net::StringUtils::randomString(int length)
     return result;
 }
 
-std::string net::StringUtils::toLower(std::string_view stringView)
-{
-    std::string str(stringView);
-    for (auto& ch : str)
-        ch = tolower(ch);
-
-    return std::move(str);
-}
-
 class TBitStream
 {
 public:
     std::stringstream bytes;
 
 private:
-    uint16_t acctor = 0;
+    uint16_t acctor;
     int bits = 0;
 
 public:
@@ -50,6 +41,17 @@ public:
         }
     }
 };
+
+std::string net::StringUtils::toLower(std::string_view stringView)
+{
+    std::string str(stringView);
+    for (auto& ch : str)
+        ch = tolower(ch);
+
+    return std::move(str);
+}
+
+
 
 void net::StringUtils::parseNameValuePairs(std::list<Property>& props, std::string_view str, char delim)
 {
