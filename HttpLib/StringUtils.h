@@ -8,7 +8,7 @@
 
 namespace net::StringUtils
 {
-    std::string randomString(int length) noexcept;
+    std::string randomString(int length);
     std::string toLower(std::string_view str);
     void parseNameValuePairs(std::list<Property>& props, std::string_view str, char delim);
     std::string urlDecode(std::string_view url);

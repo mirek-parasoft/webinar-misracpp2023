@@ -6,7 +6,7 @@
 
 std::string SEED = net::StringUtils::randomString(64); 
 
-std::string net::StringUtils::randomString(int length) noexcept
+std::string net::StringUtils::randomString(int length)
 {
     const std::string alphabet = "0123456789ABCDEF";
     std::random_device random_device;
@@ -181,18 +181,18 @@ public:
     std::stringstream bytes;
 
 private:
-    uint16_t accumulator = 0;
+    uint16_t acc;
     int bits = 0;
 
 public:
     void addBits(uint8_t value, int n)
     {
-        accumulator = (accumulator << n) + value;
+        acc = (acc << n) + value;
         bits += n;
         if (bits >= 8)
         {
-            bytes << (char)(accumulator >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
-            accumulator &= 0xff;
+            bytes << (char)(acc >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
+            acc &= 0xff;
             bits -= 8;
         }
     }
