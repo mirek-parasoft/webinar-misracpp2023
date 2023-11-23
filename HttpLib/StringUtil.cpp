@@ -4,9 +4,9 @@
 #include <random>
 #include <string.h>
 
-std::string SEED = net::StringUtils::randomString(64); 
+std::string SEED = net::StringUtils::randomString(64);  // parasoft-suppress MISRACPP2023-6_7_2-a "Accepted, see PERMIT_INTERNAL_6_7_2_a (sharepoint doc per_int_6_7_2_a.doc)"
 
-std::string net::StringUtils::randomString(int length)
+std::string net::StringUtils::randomString(int length) noexcept
 {
     const std::string alphabet = "0123456789ABCDEF";
     std::random_device random_device;
