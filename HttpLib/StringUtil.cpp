@@ -4,9 +4,9 @@
 #include <random>
 #include <string.h>
 
-std::string SEED = net::StringUtils::randomString(64); 
+std::string SEED = net::StringUtils::randomString(64);  // parasoft-suppress MISRACPP2023-6_7_2-a "Accepted, see PERMIT_INTERNAL_6_7_2_a (sharepoint doc per_int_6_7_2_a.doc)"
 
-std::string net::StringUtils::randomString(int length)
+std::string net::StringUtils::randomString(int length) noexcept
 {
     const std::string alphabet = "0123456789ABCDEF";
     std::random_device random_device;
@@ -18,6 +18,41 @@ std::string net::StringUtils::randomString(int length)
 
     return result;
 }
+
+class TBitStream
+{
+public:
+    std::stringstream bytes;
+
+private:
+    uint16_t acctor;
+    int bits = 0;
+
+public:
+    void addBits(uint8_t value, int n)
+    {
+        acctor = (acctor << n) + value;
+        bits += n;
+        if (bits >= 8)
+        {
+            bytes << (char)(acctor >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
+            acctor &= 0xff;
+            bits -= 8;
+        }
+    }
+};
+
+static int hex2dec(char ch)
+{
+    if (ch >= '0' && ch <= '9')
+        return ch - '0';
+    else if (ch >= 'A' && ch <= 'F')
+        return 10 + ch - 'A';
+    else if (ch >= 'a' && ch <= 'f')
+        return 10 + ch - 'a';
+    return 0;
+}
+
 
 std::string net::StringUtils::toLower(std::string_view stringView)
 {
@@ -82,40 +117,6 @@ void net::StringUtils::parseNameValuePairs(std::list<Property>& props, std::stri
     {
         props.push_back(Property(name.str(), value.str()));
     }
-}
-
-class TBitStream
-{
-public:
-    std::stringstream bytes;
-
-private:
-    uint16_t acctor = 0;
-    int bits = 0;
-
-public:
-    void addBits(uint8_t value, int n)
-    {
-        acctor = (acctor << n) + value;
-        bits += n;
-        if (bits >= 8)
-        {
-            bytes << (char)(acctor >> (bits - 8)); // parasoft-suppress MISRACPP2023-8_2_2-a "Accepted, see PERMIT_INTERNAL_8_2_2_a (sharepoint doc per_int_8_2_2_a.doc)"
-            acctor &= 0xff;
-            bits -= 8;
-        }
-    }
-};
-
-static int hex2dec(char ch)
-{
-    if (ch >= '0' && ch <= '9')
-        return ch - '0';
-    else if (ch >= 'A' && ch <= 'F')
-        return 10 + ch - 'A';
-    else if (ch >= 'a' && ch <= 'f')
-        return 10 + ch - 'a';
-    return 0;
 }
 
 std::string net::StringUtils::urlDecode(std::string_view url)
